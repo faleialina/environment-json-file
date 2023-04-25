@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAll, createEnvironment, deleteEnvironment } = require('./service/service.js');
+const { getAll, createEnvironment, updateEnvironment, deleteEnvironment } = require('./service/service.js');
 const bodyParser = require('body-parser');
 
 const app = express();
@@ -21,9 +21,20 @@ app.post('/', function (req, res) {
         const data = createEnvironment(label, category, priority);
         res.send(data);
     } catch (error) {
-        res.send(error.message)
+        res.send(error.message);
     }
 });
+
+app.put('/:id', function (req, res) {
+    try {
+        const { id } = res.params;
+        const { label, category, priority } = res.body;
+        const data = updateEnvironment(id, label, category, priority);
+        res.send(data);
+    } catch (error) {
+        res.send(error.message);
+    }
+})
 
 app.delete('/:id', function (req, res) {
     try {

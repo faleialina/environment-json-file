@@ -20,6 +20,22 @@ function createEnvironment(label, category, priority) {
     return arr;
 };
 
+function updateEnvironment(id, label, category, priority) {
+    const arr = JSON.parse(fs.readFileSync(path));
+    const filtered = arr.filter((elem) => elem.id !== elem);
+    if (filtered.length !== arr.length) {
+        arr.push({
+            id: id,
+            label: label,
+            category: category,
+            priority: priority
+        });
+    } else {
+        throw new Error('id нет');
+    };
+    fs.writeFileSync(path, JSON.stringify(filtered));
+};
+
 function deleteEnvironment(id) {
     const arr = JSON.parse(fs.readFileSync(path));
     const filtered = arr.filter((elem) => elem.id != id);
@@ -27,4 +43,4 @@ function deleteEnvironment(id) {
     return filtered;
 };
 
-module.exports = { getAll, createEnvironment, deleteEnvironment };
+module.exports = { getAll, createEnvironment, updateEnvironment, deleteEnvironment };
