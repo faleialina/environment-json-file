@@ -22,18 +22,21 @@ function createEnvironment(label, category, priority) {
 
 function updateEnvironment(id, label, category, priority) {
     const arr = JSON.parse(fs.readFileSync(path));
-    const filtered = arr.filter((elem) => elem.id !== elem);
+    const filtered = arr.filter((elem) => elem.id != id);
     if (filtered.length !== arr.length) {
-        arr.push({
+        filtered.push({
             id: id,
             label: label,
             category: category,
             priority: priority
         });
+        fs.writeFileSync(path, JSON.stringify(filtered));
+        return filtered;
+
     } else {
         throw new Error('id нет');
     };
-    fs.writeFileSync(path, JSON.stringify(filtered));
+
 };
 
 function deleteEnvironment(id) {

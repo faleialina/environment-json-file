@@ -27,8 +27,8 @@ app.post('/', function (req, res) {
 
 app.put('/:id', function (req, res) {
     try {
-        const { id } = res.params;
-        const { label, category, priority } = res.body;
+        const { id } = req.params;
+        const { label, category, priority } = req.body;
         const data = updateEnvironment(id, label, category, priority);
         res.send(data);
     } catch (error) {
