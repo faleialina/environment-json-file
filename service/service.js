@@ -4,7 +4,7 @@ const path = './storage/storage.json';
 
 function getAll() {
     const arr = JSON.parse(fs.readFileSync(path));
-    if (!arr.length) throw new Error('массив пуст');
+    if (!arr.length) throw new Error('array is empty');
     return arr;
 }
 
@@ -34,7 +34,7 @@ function updateEnvironment(id, label, category, priority) {
         return filtered;
 
     } else {
-        throw new Error('id нет');
+        throw new Error('id no');
     };
 
 };
